@@ -1,30 +1,18 @@
-# Example README.md file for Coursera Projects
+# GPU-Accelerated Batch Merge Sort using CUDA
 
 ## Overview
+This project implements the merge sort algorithm on the GPU using CUDA, then demonstrates execution at scale by running the GPU-based sort across 200 independently-generated random arrays in a single program execution.
+
+Each array is sorted using a bottom-up, iterative merge sort kernel (`gpu_mergesort`), where the input is divided into slices and threads across a configurable grid cooperatively merge increasingly large sorted runs until the full array is sorted. Kernel execution time is measured per array using CUDA events.
 
 ## Code Organization
 
-```bin/```
-This folder should hold all binary/executable code that is built automatically or manually. Executable code should have use the .exe extension or programming language-specific extension.
+- `merge_sort.cu` / `merge_sort.h` — source code implementing host-side memory management, kernel launch orchestration, and the GPU merge sort kernel itself.
+- `Makefile` — builds the project into `merge_sort.exe`.
+- `results_batch_run_log.txt` — sample output from running the program: 200 arrays, each showing unsorted input, sorted output, and GPU kernel execution time.
+- `helper/helper_cuda.h` — placeholder for the NVIDIA cuda-samples helper header referenced by the build (not used by any code path in this project).
 
-```data/```
-This folder should hold all example data in any format. If the original data is rather large or can be brought in via scripts, this can be left blank in the respository, so that it doesn't require major downloads when all that is desired is the code/structure.
-
-```lib/```
-Any libraries that are not installed via the Operating System-specific package manager should be placed here, so that it is easier for inclusion/linking.
-
-```src/```
-The source code should be placed here in a hierarchical fashion, as appropriate.
-
-```README.md```
-This file should hold the description of the project so that anyone cloning or deciding if they want to clone this repository can understand its purpose to help with their decision.
-
-```INSTALL```
-This file should hold the human-readable set of instructions for installing the code so that it can be executed. If possible it should be organized around different operating systems, so that it can be done by as many people as possible with different constraints.
-
-```Makefile or CMAkeLists.txt or build.sh```
-There should be some rudimentary scripts for building your project's code in an automatic fashion.
-
-```run.sh```
-An optional script used to run your executable code, either with or without command-line arguments.
-
+## How to Build
+make build
+## How to Run
+make run
